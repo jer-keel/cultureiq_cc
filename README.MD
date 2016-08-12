@@ -15,7 +15,7 @@ Web Framework: Django
 
 Frontend Framework: AngularJS
 
-## Installation and setup
+## Installation and Setup
 
 Must install the python packages `langdetect` and `google-api-python-client`
 
