@@ -6,10 +6,25 @@ thead {
   margin-top: 60px;
 }
 
+.fa-arrow-down {
+  display: none;
+}
+
 .arrow-div {
   text-align: center;
 }
 
 .detected-language {
   font-weight: bold;
+}
+
+@media (max-width:992px) {
+  .fa-arrow-right {
+    margin-top: 0;
+    display: none;
+  }
+
+  .fa-arrow-down {
+    display: inline;
+  }
 }
