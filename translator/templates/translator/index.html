@@ -41,13 +41,14 @@
     <p>Input a string from a foreign language (not English) on the left, press the translate button, and the string will be translated to English!</p>
     <hr>
     <div class="col-md-5">
-      <form>
+      <form action="{% url 'translator:translate' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
-          <label for="input-string">String to Translate</label>
-          <textarea id="input-string" type="text" class="form-control" placeholder="Io sono Marco Polo!"></textarea>
+          <label for="input_string">String to Translate</label>
+          <textarea id="input_string" name="input_string" type="text" class="form-control" placeholder="Io sono Marco Polo!"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Translate</button>
+      </form>
     </div>
     <div class="col-md-2 arrow-div">
       <i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
