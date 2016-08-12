@@ -20,6 +20,10 @@ submitApp.controller('formController', ['$scope', '$http', function($scope, $htt
   };
 
   $scope.processForm = function() {
+    $scope.output = {
+      lang: "PROCESSING INPUT"
+    };
+
     $http({
       method: 'POST',
       url: 'translate/',

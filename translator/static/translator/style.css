@@ -9,3 +9,7 @@ thead {
 .arrow-div {
   text-align: center;
 }
+
+.detected-language {
+  font-weight: bold;
+}

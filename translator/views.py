@@ -6,12 +6,19 @@ from langdetect import detect
 
 from googleapiclient.discovery import build
 import json
-
 from .models import TranslatedText
 
 # Setup Google API token and build the Google translation service
 API_TOKEN = json.load(open("translator/config/google_api.json"))["API_TOKEN"]
 service = build("translate", "v2", developerKey=API_TOKEN)
+
+# Parse language codes csv, create dictionary
+lang_file = open("translator/language-codes.csv", "r")
+lang_dict = {}
+for line in lang_file:
+    args = line.strip().replace("\"", "").split(",")
+    lang_dict[args[0]] = args[1]
+
 
 # Define our two main views, index and translation archive
 def index(request):
@@ -34,23 +41,29 @@ def translate(request):
             # Determine language and send to google translate to translate
             lang = detect(input_string)
             print(lang)
-            translated_text = service.translations().list(
-                source=lang,
-                target="en",
-                q=[input_string]
-            ).execute()["translations"][0]["translatedText"]
+            if lang != "en":
+                translated_text = service.translations().list(
+                    source=lang,
+                    target="en",
+                    q=[input_string]
+                ).execute()["translations"][0]["translatedText"]
+            else:
+                translated_text = input_string
 
             # Store the information in the database
             text = TranslatedText()
             text.original_text = input_string
             text.translated_text = translated_text
             text.detected_langugae_code = lang
-            text.detected_language = lang  # TODO: Determine detected language
+            if lang in lang_dict:
+                text.detected_language = lang_dict[lang]
+            else:
+                text.detected_language = lang
             text.save()
 
             json_response = {
                 "translated_text": translated_text,
-                "detected_language": lang,
+                "detected_language": text.detected_language,
             }
             return JsonResponse(json_response)
     else:
