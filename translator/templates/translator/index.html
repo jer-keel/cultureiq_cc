@@ -11,10 +11,14 @@
   <link rel="stylesheet" type="text/css" href="{% static 'translator/style.css' %}">
 
   <!-- IMPORT JS -->
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="{% static 'translator/submit_app.js' %}"></script>
 </head>
 
-<body>
+<body ng-app="submitApp", ng-controller="formController">
+  <!-- NAVBAR -->
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
@@ -41,21 +45,26 @@
     <p>Input a string from a foreign language (not English) on the left, press the translate button, and the string will be translated to English!</p>
     <hr>
     <div class="col-md-5">
-      <form action="{% url 'translator:translate' %}" method="post">
+      <!-- INPUT FORM -->
+      <form ng-submit="processForm()">
         {% csrf_token %}
         <div class="form-group">
           <label for="input_string">String to Translate</label>
-          <textarea id="input_string" name="input_string" type="text" class="form-control" placeholder="Io sono Marco Polo!"></textarea>
+          <textarea rows=5 id="input_string" name="input_string" type="text" class="form-control" placeholder="Io sono Marco Polo!" ng-model="formData.input_string"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Translate</button>
       </form>
+      <br>
+      <p>Detected Language: <span>{$ output.lang $}</span></p>
     </div>
+    <!-- ARROW -->
     <div class="col-md-2 arrow-div">
       <i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
     </div>
+    <!-- TRANSLATION OUTPUT -->
     <div class="col-md-5">
       <label for="output-string">Translated String</label>
-      <textarea id="output-string" type="text" class="form-control" placeholder="I am Marco Polo!"></textarea>
+      <textarea rows=5 id="output-string" type="text" class="form-control" placeholder="I am Marco Polo!" ng-model="output.translated_text"></textarea>
       </textarea>
     </div>
   </div>
