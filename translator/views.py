@@ -47,8 +47,8 @@ def translate(request):
                 lang = detect(input_string)
             except:
                 return JsonResponse({
-                    "translated_text": "Error occurred during detection",
-                    "detected_language": "Error occurred during detection"
+                    "translated_text": "Could not detect language",
+                    "detected_language": "Could not detect language"
                 })
 
             print(lang)
