@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Translation Archive</h1>
+
+  <!-- Table to display all results -->
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <td>Original String</td>
+        <td>Translated String</td>
+        <td>Original Language</td>
+        <td>Date Translated</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="text in translations">
+        <td>{$ text.original_text $}</td>
+        <td>{$ text.translated_text $}</td>
+        <td>{$ text.detected_language $}</td>
+        <td>{$ text.translate_date | date:'medium' $}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

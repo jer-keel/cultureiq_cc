@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html>
+<html ng-app="submitApp">
 <head>
   <!-- Set content information and get display information -->
   <meta charset="utf-8">
@@ -17,6 +17,7 @@
 
   <!-- IMPORT JS -->
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="{% static 'translator/submit_app.js' %}"></script>
@@ -26,9 +27,11 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+  <base href="/">
 </head>
 
-<body ng-app="submitApp", ng-controller="formController">
+<body>
   <!-- NAVBAR -->
   <nav class="navbar navbar-default">
     <div class="container">
@@ -45,40 +48,15 @@
       <div class="collapse navbar-collapse" id="collapsed-nav">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Translate New</a></li>
-          <li><a href="/texts">Translation Archive</a></li>
+          <li><a href="/translations">Translation Archive</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="container">
-    <h1>Translate</h1>
-    <p>Input a string from a foreign language (not English) on the left, press the translate button, and the string will be translated to English!</p>
-    <hr>
-    <div class="col-md-5">
-      <!-- INPUT FORM -->
-      <form ng-submit="processForm()">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="input_string">String to Translate</label>
-          <textarea rows=5 id="input_string" name="input_string" type="text" class="form-control" placeholder="Io sono Marco Polo!" ng-model="formData.input_string"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Translate</button>
-      </form>
-      <br>
-      <p>Detected Language: <span class="detected-language">{$ output.lang $}</span></p>
-    </div>
-    <!-- ARROW -->
-    <div class="col-md-2 arrow-div">
-      <i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
-      <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
-    </div>
-    <!-- TRANSLATION OUTPUT -->
-    <div class="col-md-5">
-      <label for="output-string">Translated String</label>
-      <textarea rows=5 id="output-string" type="text" class="form-control" placeholder="I am Marco Polo!" ng-model="output.translated_text"></textarea>
-      </textarea>
-    </div>
+  {% csrf_token %}
+  <div id="main">
+    <div ng-view></div>
   </div>
 </body>
 </html>

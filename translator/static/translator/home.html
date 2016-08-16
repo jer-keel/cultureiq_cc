@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Translate</h1>
+  <p>Input a string from a foreign language (not English) on the left, press the translate button, and the string will be translated to English!</p>
+  <hr>
+  <div class="col-md-5">
+    <!-- INPUT FORM -->
+    <form ng-submit="processForm()">
+      <div class="form-group">
+        <label for="input_string">String to Translate</label>
+        <textarea rows=5 id="input_string" name="input_string" type="text" class="form-control" placeholder="Io sono Marco Polo!" ng-model="formData.input_string"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Translate</button>
+    </form>
+    <br>
+    <p>Detected Language: <span class="detected-language">{$ output.lang $}</span></p>
+  </div>
+  <!-- ARROW -->
+  <div class="col-md-2 arrow-div">
+    <i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
+    <i class="fa fa-arrow-down fa-3x" aria-hidden="true"></i>
+  </div>
+  <!-- TRANSLATION OUTPUT -->
+  <div class="col-md-5">
+    <label for="output-string">Translated String</label>
+    <textarea rows=5 id="output-string" type="text" class="form-control" placeholder="I am Marco Polo!" ng-model="output.translated_text"></textarea>
+    </textarea>
+  </div>
+</div>
