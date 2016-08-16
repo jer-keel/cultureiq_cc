@@ -1,4 +1,5 @@
 from django.db import models
+import json
 
 # Create your models here.
 
@@ -22,3 +23,6 @@ class TranslatedText(models.Model):
 
     def __str__(self):
         return self.original_text
+
+    def to_JSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)

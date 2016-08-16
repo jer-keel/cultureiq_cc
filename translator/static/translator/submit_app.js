@@ -18,6 +18,7 @@ submitApp.controller('formController', ['$scope', '$http', function($scope, $htt
   $scope.output = {
     lang: "N/A"
   };
+  $scope.tableData = [];
 
   $scope.processForm = function() {
     $scope.output = {
