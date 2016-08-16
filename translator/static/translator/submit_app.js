@@ -64,7 +64,6 @@ submitApp.controller('tableController', ['$scope', '$http', function($scope, $ht
     url: 'api/translations/'
   })
   .success(function(data) {
-    console.log(data.translations);
     $scope.translations = data.translations;
   });
 }]);
